@@ -17,6 +17,7 @@ class VrtcalAdMobAdaptersWrapper: NSObject, AdapterWrapperProtocol {
     
     var appLogger: Logger
     var sdkEventsLogger: Logger
+    var sdk = SDK.googleMobileAds
     var delegate: AdapterWrapperDelegate
     
     var gadInterstitialAd: GADInterstitialAd?
@@ -32,8 +33,6 @@ class VrtcalAdMobAdaptersWrapper: NSObject, AdapterWrapperProtocol {
     }
     
     func initializeSdk() {
-        appLogger.log()
-        
         // Vrtcal iPhone 11
         GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "bc8b2db6f176d262669c7768ea6ea2e5"
         ]
@@ -101,6 +100,10 @@ class VrtcalAdMobAdaptersWrapper: NSObject, AdapterWrapperProtocol {
         }
         
         return false
+    }
+    
+    func destroyInterstitial() {
+        gadInterstitialAd = nil
     }
 }
 
