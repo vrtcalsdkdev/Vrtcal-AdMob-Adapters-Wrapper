@@ -49,15 +49,15 @@ class VrtcalAdMobAdaptersWrapper: NSObject, AdapterWrapperProtocol {
         }
     }
     
-    func handle(vrtcalAsSecondaryConfig: VrtcalAsSecondaryConfig) {
+    func handle(adTechConfig: AdTechConfig) {
         
-        switch vrtcalAsSecondaryConfig.placementType {
+        switch adTechConfig.placementType {
             case .banner:
                 appLogger.log("Google Mobile Ads Banner - VRTGADCustomEventBanner")
                 var gadSize = GADAdSize()
                 gadSize.size = CGSize(width:320,height:50)
                 let gadBannerView = GADBannerView(adSize: gadSize)
-                gadBannerView.adUnitID = vrtcalAsSecondaryConfig.adUnitId
+                gadBannerView.adUnitID = adTechConfig.adUnitId
                 gadBannerView.rootViewController = delegate.viewController
                 gadBannerView.delegate = self
                 delegate.provide(banner: gadBannerView)
@@ -68,7 +68,7 @@ class VrtcalAdMobAdaptersWrapper: NSObject, AdapterWrapperProtocol {
                 
                 let gadRequest = GADRequest()
                 GADInterstitialAd.load(
-                    withAdUnitID: vrtcalAsSecondaryConfig.adUnitId,
+                    withAdUnitID: adTechConfig.adUnitId,
                     request: gadRequest
                 ) { gadInterstitialAd, error in
 
