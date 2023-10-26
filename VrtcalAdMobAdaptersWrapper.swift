@@ -8,6 +8,8 @@ extension GADAdapterInitializationState: CustomStringConvertible {
                 return "notReady"
             case .ready:
                 return "ready"
+            default:
+                return "Unknown"
         }
     }
 }
