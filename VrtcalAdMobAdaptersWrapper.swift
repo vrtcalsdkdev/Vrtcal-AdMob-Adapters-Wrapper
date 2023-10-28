@@ -19,7 +19,7 @@ class VrtcalAdMobAdaptersWrapper: NSObject, AdapterWrapperProtocol {
     
     var appLogger: Logger
     var sdkEventsLogger: Logger
-    var sdk = SDK.googleMobileAds
+    var sdk = SDK.adMob
     var delegate: AdapterWrapperDelegate
     
     var gadInterstitialAd: GADInterstitialAd?
@@ -62,7 +62,7 @@ class VrtcalAdMobAdaptersWrapper: NSObject, AdapterWrapperProtocol {
                 gadBannerView.adUnitID = adTechConfig.adUnitId
                 gadBannerView.rootViewController = delegate.viewController
                 gadBannerView.delegate = self
-                delegate.provide(banner: gadBannerView)
+                delegate.adapterWrapperDidProvide(banner: gadBannerView)
                 gadBannerView.load(GADRequest())
 
             case .interstitial:
