@@ -35,19 +35,33 @@ class VrtcalAdMobAdaptersWrapper: NSObject, AdapterWrapperProtocol {
     }
     
     func initializeSdk() {
+        self.appLogger.log()
+        
         // Vrtcal iPhone 11
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "bc8b2db6f176d262669c7768ea6ea2e5"
-        ]
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["bc8b2db6f176d262669c7768ea6ea2e5"]
 
         GADMobileAds.sharedInstance().start { gadInitializationStatus in
             
-            let adapterStatusesByClassName = gadInitializationStatus.adapterStatusesByClassName.map {
-                "\($0): \($1.state), latency: \($1.latency)"
+            
+            let adapterStatusesByClassName = gadInitializationStatus.adapterStatusesByClassName.map { adapter in
+                let strName = adapter.key
+                let gadAdapterStatus = adapter.value
+                let status = gadAdapterStatus.state
+                
+                if status == .ready {
+                    return "\(strName): ready"
+                } else {
+                    let reason = gadAdapterStatus
+                        .description
+                        .substring(fromLast:";")?
+                        .replacingOccurrences(of: ">", with: "") ?? ""
+                    return "\(strName): \(status), \(reason)"
+                }
             }
             .sorted()
-            .joined(separator: ",")
+            .joined(separator: "\n")
             
-            self.sdkEventsLogger.log("GADMobileAds init complete. adapterStatusesByClassName: [\(adapterStatusesByClassName)]")
+            self.sdkEventsLogger.log("GADMobileAds init complete. adapterStatusesByClassName: \n\(adapterStatusesByClassName)")
         }
     }
     
@@ -55,7 +69,7 @@ class VrtcalAdMobAdaptersWrapper: NSObject, AdapterWrapperProtocol {
         
         switch adTechConfig.placementType {
             case .banner:
-                appLogger.log("Google Mobile Ads Banner - VRTGADCustomEventBanner")
+                appLogger.log("Google Mobile Ads Banner - VRTGADMediationBannerAd")
                 var gadSize = GADAdSize()
                 gadSize.size = CGSize(width:320,height:50)
                 let gadBannerView = GADBannerView(adSize: gadSize)
@@ -166,3 +180,14 @@ extension VrtcalAdMobAdaptersWrapper : GADFullScreenContentDelegate {
     }
 }
 
+
+
+extension String {
+    func substring(fromLast: String) -> String? {
+        guard let substring = self.components(separatedBy: fromLast).last else {
+            return nil
+        }
+        
+        return String(substring)
+    }
+}
