@@ -49,13 +49,13 @@ class VrtcalAdMobAdaptersWrapper: NSObject, AdapterWrapperProtocol {
                 let status = gadAdapterStatus.state
                 
                 if status == .ready {
-                    return "\(strName): ready"
+                    return "\(strName): ✅"
                 } else {
                     let reason = gadAdapterStatus
                         .description
                         .substring(fromLast:";")?
                         .replacingOccurrences(of: ">", with: "") ?? ""
-                    return "\(strName): \(status), \(reason)"
+                    return "\(strName): ❌, \(reason)"
                 }
             }
             .sorted()
@@ -109,6 +109,7 @@ class VrtcalAdMobAdaptersWrapper: NSObject, AdapterWrapperProtocol {
     }
     
     func showInterstitial() -> Bool {
+        appLogger.log()
         //Google Mobile Ads
         if let gadInterstitialAd {
             gadInterstitialAd.present(fromRootViewController: delegate.viewController)
