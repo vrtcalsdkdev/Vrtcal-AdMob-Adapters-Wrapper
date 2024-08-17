@@ -37,8 +37,11 @@ class VrtcalAdMobAdaptersWrapper: NSObject, AdapterWrapperProtocol {
     func initializeSdk() {
         self.appLogger.log()
         
-        // Vrtcal iPhone 11
-        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = ["bc8b2db6f176d262669c7768ea6ea2e5"]
+        
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [
+            "bc8b2db6f176d262669c7768ea6ea2e5", // Vrtcal iPhone 11
+            "bd799f83fd95f07a2719d1bb226c76ca"  // Vrtcal iPhone XR
+        ]
 
         GADMobileAds.sharedInstance().start { gadInitializationStatus in
             
