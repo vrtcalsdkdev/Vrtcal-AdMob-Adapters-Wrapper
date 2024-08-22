@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
     s.source_files = "*.swift"
 
     s.platform = :ios
-    s.ios.deployment_target  = '11.0'
+    s.ios.deployment_target  = '12.0'
 
     s.dependency 'Vrtcal-Adapters-Wrapper-Parent'
     s.dependency 'Vrtcal-AdMob-Adapters'
