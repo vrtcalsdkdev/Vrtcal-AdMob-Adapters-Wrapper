@@ -39,9 +39,11 @@ class VrtcalAdMobAdaptersWrapper: NSObject, AdapterWrapperProtocol {
         
         
         GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [
-            "bc8b2db6f176d262669c7768ea6ea2e5", // Scott Vrtcal iPhone 11
-            "bd799f83fd95f07a2719d1bb226c76ca",  // Scott Vrtcal iPhone XR
-            "54829330cdb5c96af35c5e9477a3ee6c" // Dennis Vrtcal iPad
+            "bc8b2db6f176d262669c7768ea6ea2e5", // Scott iPhone 11
+            "bd799f83fd95f07a2719d1bb226c76ca", // Scott iPhone XR
+            "54829330cdb5c96af35c5e9477a3ee6c", // Dennis Vrtcal iPad
+            "67cb2ecd3963bd12c15b0362eddffe24", // Dennis iPhone 13 Mini
+            "4577c0cb42fe35e076890115cbe624e3"  // Dennis iPhone 12
         ]
 
         GADMobileAds.sharedInstance().start { gadInitializationStatus in
